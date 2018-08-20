@@ -10,6 +10,8 @@ namespace MyCool.Payroll.Csl
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter a key...");
+            Console.ReadLine();
         }
     }
 }
