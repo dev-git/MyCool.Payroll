@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyCool.Payroll.Dal
 {
-    public class Class1
+    public class Db
     {
     }
 }

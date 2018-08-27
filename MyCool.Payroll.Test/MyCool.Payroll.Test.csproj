@@ -49,11 +49,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PayrollUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyCool.Payroll.Bdl\MyCool.Payroll.Bdl.csproj">
+      <Project>{04ac4541-0939-4362-9c82-a620b541ae1a}</Project>
+      <Name>MyCool.Payroll.Bdl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyCool.Payroll.Itf\MyCool.Payroll.Itf.csproj">
+      <Project>{639fe34e-d5b6-465a-b1f5-97832720e482}</Project>
+      <Name>MyCool.Payroll.Itf</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,3 +3,18 @@
 ################################################################################
 
 /MyCool.Payroll.Bdl/bin/Debug/MyCool.Payroll.Bdl.dll
+*.pdb
+*.dll
+*.exe
+/MyCool.Payroll.Csl/bin/Debug/MyCool.Payroll.Csl.exe.config
+/MyCool.Payroll.Dal/obj/Debug
+/MyCool.Payroll.Csl/obj/Debug
+/MyCool.Payroll.Bdl/obj/Debug
+/MyCool.Payroll.Fcd/obj/Debug
+/MyCool.Payroll.Itf/obj/Debug
+/MyCool.Payroll.Test/bin/Debug
+/MyCool.Payroll.Test/obj/Debug
+/MyCool.Payroll.Web/bin/Debug/netcoreapp2.1
+/MyCool.Payroll.Win/bin/Debug
+/MyCool.Payroll.Win/obj/Debug
+/MyCool.Payroll.Web/obj

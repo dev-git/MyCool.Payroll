@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace MyCool.Payroll.Bdl
 {
-    public class Class1
+    public class Employee
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public decimal AnnualSalary { get; set; }
+        public int SuperRate { get; set; }
+        public DateTime PaymentStart { get; set; }
+        public string FullName
+        {
+            get
+            {
+               return String.Format("{0} {1}", FirstName, LastName);
+            }
+        }
     }
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace MyCool.Payroll.Itf
 {
-    interface IPayroll
+    public interface IPayroll
     {
         bool LoadData();
 
         void PrintPayslip();
 
         void GetEmployee();
-
 
     }
 }

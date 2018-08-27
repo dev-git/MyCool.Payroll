@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCool.Payroll.Bdl", "MyCoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCool.Payroll.Dal", "MyCool.Payroll.Dal\MyCool.Payroll.Dal.csproj", "{06C350C4-0B91-40BE-9255-F98038BB6D1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCool.Payroll.Web", "MyCool.Payroll.Web\MyCool.Payroll.Web.csproj", "{20676F3B-32C7-4FE4-9953-A28375970CBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{06C350C4-0B91-40BE-9255-F98038BB6D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06C350C4-0B91-40BE-9255-F98038BB6D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06C350C4-0B91-40BE-9255-F98038BB6D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20676F3B-32C7-4FE4-9953-A28375970CBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20676F3B-32C7-4FE4-9953-A28375970CBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20676F3B-32C7-4FE4-9953-A28375970CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20676F3B-32C7-4FE4-9953-A28375970CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{6582D8E8-FC62-4EE9-9605-303AF4087D90} = {A529F662-6417-47CE-B9AF-1B08B513C85D}
 		{04AC4541-0939-4362-9C82-A620B541AE1A} = {2D2381ED-9E4D-4954-926B-9C5CE1F9A966}
 		{06C350C4-0B91-40BE-9255-F98038BB6D1D} = {84E8C89A-C4E1-408F-8F36-8E33B5A47FD2}
+		{20676F3B-32C7-4FE4-9953-A28375970CBF} = {5993C1B3-F6AD-47BD-8359-3C0F6D29B707}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EFE7DE1-9C91-43F5-8F5F-74BBF047685D}
