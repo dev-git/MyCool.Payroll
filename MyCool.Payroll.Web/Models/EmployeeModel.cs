@@ -7,6 +7,7 @@ namespace MyCool.Payroll.Web.Models
 {
     public class EmployeeModel
     {
+        public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal AnnualSalary { get; set; }

@@ -1,0 +1,60 @@
+﻿@model MyCool.Payroll.Web.Models.PayslipModel
+
+@{
+    ViewData["Title"] = "Payslip";
+}
+
+<h2>Payslip</h2>
+
+<div>
+    <h4>PayslipModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PayslipID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PayslipID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PayPeriod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PayPeriod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossIncome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GrossIncome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IncomeTax)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IncomeTax)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NetIncome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NetIncome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SuperRate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SuperRate)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

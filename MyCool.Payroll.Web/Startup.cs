@@ -59,6 +59,10 @@ namespace MyCool.Payroll.Web
                     template: "{controller=Payroll}/{action=Index}/{id?}");
 
                 routes.MapRoute(
+                     name: "payslip",
+                     template: "{controller=Payroll}/{action=Print}/{fullName?}/{annualSalary?}");
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
                 

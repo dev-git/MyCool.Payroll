@@ -7,6 +7,7 @@ namespace MyCool.Payroll.Web.Models
 {
     public class PayslipModel
     {
+        public int PayslipID { get; set; }
         public string FullName { get; set; }
         public string PayPeriod { get; set; }
         public decimal GrossIncome { get; set; }

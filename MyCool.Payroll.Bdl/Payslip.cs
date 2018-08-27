@@ -8,6 +8,7 @@ namespace MyCool.Payroll.Bdl
 {
     public class Payslip
     {
+        public int PayslipID { get; set; }
         public string FullName { get; set; }
         public string PayPeriod { get; set; }
         public decimal GrossIncome { get; set; }

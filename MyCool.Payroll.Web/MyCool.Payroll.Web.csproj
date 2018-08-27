@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>68a8c9ea-85ba-4810-b52f-6eb87483f9af</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Csv" Version="1.0.31" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCool.Payroll.Fcd\MyCool.Payroll.Fcd.csproj" />
   </ItemGroup>
 
 </Project>

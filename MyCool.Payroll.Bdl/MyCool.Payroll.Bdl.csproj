@@ -44,6 +44,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="Payslip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxBand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

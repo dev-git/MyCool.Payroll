@@ -44,15 +44,14 @@ namespace MyCool.Payroll.Test
         {
             throw new NotImplementedException();
         }
-
+        
+        [TestMethod]
         public void PrintPayslip()
         {
             throw new NotImplementedException();
         }
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+        
+
     }
 }

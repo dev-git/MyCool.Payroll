@@ -18,3 +18,10 @@
 /MyCool.Payroll.Win/bin/Debug
 /MyCool.Payroll.Win/obj/Debug
 /MyCool.Payroll.Web/obj
+/MyCool.Payroll.Bdl/obj/Release
+/MyCool.Payroll.Csl/obj/Release
+/MyCool.Payroll.Dal/obj/Release
+/MyCool.Payroll.Fcd/obj/Release
+/MyCool.Payroll.Itf/obj/Release
+/MyCool.Payroll.Test/obj/Release
+/MyCool.Payroll.Win/obj/Release

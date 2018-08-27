@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System.IO;
-using Csv;
+using MyCool.Payroll.Fcd;
 
 
 namespace MyCool.Payroll.Web.Controllers
 {
     public class PayrollController : Controller
     {
+        Facade serviceImplementation = new Facade();
         // GET: Payroll
         public IActionResult Index()
         {
@@ -47,12 +48,10 @@ namespace MyCool.Payroll.Web.Controllers
                 {
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-
                         await formFile.CopyToAsync(stream);
                         //var reader = formFile.OpenReadStream();
                         using (var reader = new StreamReader(formFile.OpenReadStream()))
                         {
-                            //var fileContent = reader.ReadToEnd();
                             while (!reader.EndOfStream)
                             {
                                 var line = reader.ReadLine();
@@ -81,6 +80,20 @@ namespace MyCool.Payroll.Web.Controllers
             return View("_EmployeeDetail", empList);
         }
 
+        [HttpGet("Print")]
+        public ActionResult Print(string fullName, decimal annualSalary)
+        {
+            Models.PayslipModel payslipModel = new Models.PayslipModel
+            {
+                FullName = fullName,
+                GrossIncome = annualSalary,
+                IncomeTax = serviceImplementation.GetIncomeTaxAmount(annualSalary)
+            };
+
+            return View("Payslip", payslipModel);
+
+        }
+
         /// <summary>
         /// Gets the start date.
         /// </summary>
@@ -105,6 +118,7 @@ namespace MyCool.Payroll.Web.Controllers
 
             return startDate;
         }
+
 
 
         // POST: Payroll/Create

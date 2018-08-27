@@ -64,7 +64,7 @@ else
                         @Html.DisplayFor(modelItem => item.PaymentStart)
                     </td>
                     <td>
-                        @Html.ActionLink("Print Payslip", "Print", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Print Payslip", "Print", "Payroll", new { fullName = item.LastName, annualSalary = item.AnnualSalary /* id=item.PrimaryKey */ })
                     </td>
                 </tr>
             }
