@@ -27,7 +27,8 @@
           "Csv": "1.0.31",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
+          "MyCool.Payroll.Fcd": "1.0.0"
         },
         "runtime": {
           "MyCool.Payroll.Web.dll": {}
@@ -525,6 +526,43 @@
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+        }
+      },
+      "MyCool.Payroll.Bdl/1.0.0": {
+        "runtime": {
+          "MyCool.Payroll.Bdl.dll": {}
+        },
+        "compile": {
+          "MyCool.Payroll.Bdl.dll": {}
+        }
+      },
+      "MyCool.Payroll.Dal/1.0.0": {
+        "runtime": {
+          "MyCool.Payroll.Dal.dll": {}
+        },
+        "compile": {
+          "MyCool.Payroll.Dal.dll": {}
+        }
+      },
+      "MyCool.Payroll.Fcd/1.0.0": {
+        "dependencies": {
+          "MyCool.Payroll.Bdl": "1.0.0",
+          "MyCool.Payroll.Dal": "1.0.0",
+          "MyCool.Payroll.Itf": "1.0.0"
+        },
+        "runtime": {
+          "MyCool.Payroll.Fcd.dll": {}
+        },
+        "compile": {
+          "MyCool.Payroll.Fcd.dll": {}
+        }
+      },
+      "MyCool.Payroll.Itf/1.0.0": {
+        "runtime": {
+          "MyCool.Payroll.Itf.dll": {}
+        },
+        "compile": {
+          "MyCool.Payroll.Itf.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3659,6 +3697,26 @@
       "sha512": "sha512-td7x21K8LalpjTWCzW/nQboQIFbq9i0r+PCyBBCdLWWnm4NBcdN18vpz/G9hCpUaCIfRL+ZxJNVTywlNlB1aLQ==",
       "path": "system.linq.parallel/4.3.0",
       "hashPath": "system.linq.parallel.4.3.0.nupkg.sha512"
+    },
+    "MyCool.Payroll.Bdl/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MyCool.Payroll.Dal/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MyCool.Payroll.Fcd/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MyCool.Payroll.Itf/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

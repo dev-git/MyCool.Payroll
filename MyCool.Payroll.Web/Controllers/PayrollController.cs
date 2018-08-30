@@ -80,14 +80,27 @@ namespace MyCool.Payroll.Web.Controllers
             return View("_EmployeeDetail", empList);
         }
 
+        /// <summary>
+        /// Prints the specified full payslip.
+        /// </summary>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="annualSalary">The annual salary.</param>
+        /// <param name="superRate">The super rate.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <returns></returns>
         [HttpGet("Print")]
-        public ActionResult Print(string fullName, decimal annualSalary)
+        public ActionResult Print(string fullName, decimal annualSalary, decimal superRate, string payDate)
         {
+            decimal incomeTax = serviceImplementation.GetIncomeTaxAmount(annualSalary);
+            decimal superAmount = serviceImplementation.GetSuperAmount(annualSalary, superRate);
             Models.PayslipModel payslipModel = new Models.PayslipModel
             {
                 FullName = fullName,
-                GrossIncome = annualSalary,
-                IncomeTax = serviceImplementation.GetIncomeTaxAmount(annualSalary)
+                PayPeriod = payDate,
+                GrossIncome = (annualSalary / 12),
+                IncomeTax = incomeTax,
+                NetIncome = (annualSalary / 12) - incomeTax,
+                SuperAmount = superAmount
             };
 
             return View("Payslip", payslipModel);

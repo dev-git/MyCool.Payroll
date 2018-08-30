@@ -2,20 +2,64 @@
 
 @{
     ViewData["Title"] = "Index";
+
+    List<SelectListItem> yearList = new List<SelectListItem>();
+    yearList.Add(new SelectListItem { Text = "2017", Value = "2017" });
+    yearList.Add(new SelectListItem { Text = "2018", Value = "2018" });
+    yearList.Add(new SelectListItem { Text = "2019", Value = "2019" });
 }
 
 
 <h2>Payroll</h2>
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<p>
-    <a asp-action="Load">Load CSV</a>
-</p>*@
+    <p>
+        <a asp-action="Load">Load CSV</a>
+    </p>*@
 
 
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Select Month and Year</label>
+    <span class="input-group-btn">
+        <select class="form-control col-sm-5" id="cmbMonth" style="width:15%">
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9"selected>Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+        </select>
+
+        <select class="form-control col-md-10" id="cmbYear" style="width:15%">
+            <option value="2017">2017</option>
+            <option value="2018" selected>2018</option>
+            <option value="2019">2019</option>
+        </select>
+    </span>
+</div>
+
+@*<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="ddnYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Year
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">2017</a>
+        <a class="dropdown-item" href="#">2018</a>
+        <a class="dropdown-item" href="#">2019</a>
+    </div>
+</div>*@
+
+@*@Html.DropDownList("payrollYear", ViewData["yearList"] as List<SelectListItem>, new { @class = "headerselect", onchange = "SelectedIndexChanged('xmlfileitemmain')" })*@
+@*@Html.DropDownList("Select", yearList, new { @class = "btn btn-secondary dropdown-toggle", onchange = "GetYear();", @id = "cmbYear" })*@
 
 @if (Model.Count() == 0)
 {
@@ -32,10 +76,10 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.LastName)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AnnualSalary) $
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.AnnualSalary)
                 </th>
-                <th>
+                <th class="text-right">
                     @Html.DisplayNameFor(model => model.SuperRate) %
                 </th>
                 <th>
@@ -47,6 +91,7 @@ else
         <tbody>
             @foreach (var item in Model)
             {
+                
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstName)
@@ -54,17 +99,26 @@ else
                     <td>
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
-                    <td>
+                    <td align="right">
                         @Html.DisplayFor(modelItem => item.AnnualSalary)
                     </td>
-                    <td>
+                    <td align="right">
                         @Html.DisplayFor(modelItem => item.SuperRate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PaymentStart)
                     </td>
                     <td>
-                        @Html.ActionLink("Print Payslip", "Print", "Payroll", new { fullName = item.LastName, annualSalary = item.AnnualSalary /* id=item.PrimaryKey */ })
+                        
+ 
+                        <button class="btn btn-primary" type="button" onclick="@(Html.Raw(String.Format("LoadPayslip('{0}', {1}, {2}, '{3}')", 
+                                                                                String.Format("{0} {1}", item.FirstName, item.LastName),
+                                                                                item.AnnualSalary,
+                                                                                item.SuperRate,
+                                                                                item.PaymentStart.ToShortDateString()
+                                                                                )))">Print Payslip</button>
+
+                                     
                     </td>
                 </tr>
             }
@@ -72,4 +126,31 @@ else
     </table>
 }
 
+<script type="text/javascript">
+    function GetYear() {
+        var myyear = document.getElementById('cmbYear').value;
+        alert(myyear);
+        return myyear;
+    };
 
+    function LoadPayslip(fullname, annualSalary, superRate, startDate) {
+        var myYear = document.getElementById('cmbYear').value;
+        var myMonth = document.getElementById('cmbMonth').value;
+
+        var payDate = new Date(myYear, myMonth - 1, 1);
+
+        var parts = startDate.split('/');
+        var myDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+        if (payDate < myDate) {
+            alert('Employee not started');
+            //return;
+        }
+        else {
+            var url = 'Print?fullName=' + fullname + '&annualSalary=' + annualSalary + '&superRate=' + superRate + '&payDate=' + payDate.toLocaleDateString('en-NZ');
+            //var view = $.get('Print?fullName=' + fullname + '&annualSalary=600000');
+            window.open(url);
+        }
+        
+    }
+</script>

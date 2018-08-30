@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyCool.Payroll.Fcd\MyCool.Payroll.Fcd.csproj" />
+    <ProjectReference Include="..\MyCool.Payroll.Fcd\MyCool.Payroll.Fcd.csproj">
+      <Private>true</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

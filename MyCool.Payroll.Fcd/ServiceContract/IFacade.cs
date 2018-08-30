@@ -9,6 +9,6 @@ namespace MyCool.Payroll.Fcd
     public interface IFacade
     {
         decimal GetIncomeTaxAmount(decimal annualSalary);
-        decimal GetSuperAmount();
+        decimal GetSuperAmount(decimal annualSalary, decimal superRate);
     }
 }

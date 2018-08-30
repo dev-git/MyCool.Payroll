@@ -19,9 +19,14 @@ namespace MyCool.Payroll.Fcd
             return payslip.GetIncomeTaxAmount();
         }
 
-        public decimal GetSuperAmount()
+        public decimal GetSuperAmount(decimal annualSalary, decimal superRate)
         {
-            throw new NotImplementedException();
+            Payslip payslip = new Payslip
+            {
+                GrossIncome = annualSalary,
+                SuperRate = superRate
+            };
+            return payslip.GetSuperAmount();
         }
     }
 }

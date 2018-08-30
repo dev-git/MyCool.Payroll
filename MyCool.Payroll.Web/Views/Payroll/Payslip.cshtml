@@ -2,12 +2,13 @@
 
 @{
     ViewData["Title"] = "Payslip";
+    
 }
 
 <h2>Payslip</h2>
 
 <div>
-    <h4>PayslipModel</h4>
+    @*<h4>PayslipModel</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -47,14 +48,14 @@
             @Html.DisplayFor(model => model.NetIncome)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SuperRate)
+            @Html.DisplayNameFor(model => model.SuperAmount)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SuperRate)
+            @Html.DisplayFor(model => model.SuperAmount)
         </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    @*<a asp-action="Upload">Back to List</a>*@
 </div>
