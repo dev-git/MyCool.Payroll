@@ -39,24 +39,24 @@ namespace MyCool.Payroll.Bdl
             if (GrossIncome <= 0) return 0;
 
             // Get the Tax Band
-            TaxBand taxBand = new TaxBand(2018);
+            TaxBand tb = new TaxBand(2018);
 
             decimal incomeTaxAmount = 0;
-            if (GrossIncome > 18200)
+            if (GrossIncome > tb.TaxBandThreshold1)
             {
-                incomeTaxAmount +=  ((GrossIncome > taxBand.TaxBandThreshold2 ? taxBand.TaxBandThreshold2 : GrossIncome) - taxBand.TaxBandThreshold1) * 0.19M;
+                incomeTaxAmount +=  ((GrossIncome > tb.TaxBandThreshold2 ? tb.TaxBandThreshold2 : GrossIncome) - tb.TaxBandThreshold1) * tb.TaxBandRate1;
             }
-            if (GrossIncome > 37000)
+            if (GrossIncome > tb.TaxBandThreshold2)
             {
-                incomeTaxAmount += ((GrossIncome > taxBand.TaxBandThreshold3 ? taxBand.TaxBandThreshold3 : GrossIncome) - taxBand.TaxBandThreshold2) * 0.325M;
+                incomeTaxAmount += ((GrossIncome > tb.TaxBandThreshold3 ? tb.TaxBandThreshold3 : GrossIncome) - tb.TaxBandThreshold2) * tb.TaxBandRate2;
             }
-            if (GrossIncome > 87000)
+            if (GrossIncome > tb.TaxBandThreshold3)
             {
-                incomeTaxAmount += ((GrossIncome > taxBand.TaxBandThreshold4 ? taxBand.TaxBandThreshold4 : GrossIncome) - taxBand.TaxBandThreshold3) * 0.37M;
+                incomeTaxAmount += ((GrossIncome > tb.TaxBandThreshold4 ? tb.TaxBandThreshold4 : GrossIncome) - tb.TaxBandThreshold3) * tb.TaxBandRate3;
             }
-            if (GrossIncome > 180000)
+            if (GrossIncome > tb.TaxBandThreshold4)
             {
-                incomeTaxAmount += (GrossIncome - 180000) * 0.41M;
+                incomeTaxAmount += (GrossIncome - tb.TaxBandThreshold4) * tb.TaxBandRate4;
             }
             
             return Math.Round(incomeTaxAmount / 12);
