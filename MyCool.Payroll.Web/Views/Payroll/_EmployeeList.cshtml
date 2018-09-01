@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MyCool.Payroll.Web.Models.EmployeeModel>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<h2>Employee List</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnualSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SuperRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayPeriod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SuperRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayPeriod)
+            </td>
+            <td>
+                <button class="btn btn-primary"
+                        type="button" onclick="@(Html.Raw(String.Format("LoadPayslip('{0}', {1}, {2}, '{3}', {4})",
+                                                    String.Format("{0} {1}", item.FirstName, item.LastName),
+                                                    item.AnnualSalary,
+                                                    item.SuperRate,
+                                                    item.PayPeriod, 
+                                                    item.EmployeeID
+                                                    )))">
+                    Print Payslip
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+    function LoadPayslip(fullname, annualSalary, superRate, payPeriod, employeeID) {
+
+        var url = 'Load?fullName=' + fullname + '&annualSalary=' + annualSalary + '&superRate=' + superRate + '&payPeriod=' + payPeriod + '&employeeID' + employeeID;
+        window.open(url);
+       }
+</script>

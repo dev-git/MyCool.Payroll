@@ -17,9 +17,11 @@ namespace MyCool.Payroll.Web.Models
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal AnnualSalary { get; set; }
 
-        public int SuperRate { get; set; }
+        public decimal SuperRate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime PaymentStart { get; set; }
+
+        public string PayPeriod { get; set; }
     }
 }

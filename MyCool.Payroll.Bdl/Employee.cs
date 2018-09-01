@@ -14,6 +14,7 @@ namespace MyCool.Payroll.Bdl
         public decimal AnnualSalary { get; set; }
         public int SuperRate { get; set; }
         public DateTime PaymentStart { get; set; }
+
         public string FullName
         {
             get

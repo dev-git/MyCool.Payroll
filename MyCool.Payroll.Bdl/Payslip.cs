@@ -18,41 +18,47 @@ namespace MyCool.Payroll.Bdl
 
 
         /// <summary>
-        /// Gets the super amount.
+        /// Gets the monthly super amount.
         /// </summary>
         /// <returns></returns>
         public decimal GetSuperAmount()
         {
-            if (GrossIncome > 0 && SuperRate > 0)
-            {
-                return Math.Floor(((GrossIncome / 12) * SuperRate) / 100);
-            }
-            return 0;
+            // Return early if we have no GrossIncome or SuperRate
+            if (GrossIncome <= 0 || SuperRate <= 0) return 0;
+           
+            return Math.Round(((GrossIncome / 12) * SuperRate) / 100);
         }
 
+        /// <summary>
+        /// Gets the monthly income tax amount.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetIncomeTaxAmount()
         {
+            // Return early if we have no GrossIncome
+            if (GrossIncome <= 0) return 0;
+
+            // Get the Tax Band
+            TaxBand taxBand = new TaxBand(2018);
+
             decimal incomeTaxAmount = 0;
-            if (GrossIncome > 0)
+            if (GrossIncome > 18200)
             {
-                if (GrossIncome > 18200)
-                {
-                    // if Gross Amount > 37000 ? 37000 : GrossAmount
-                    incomeTaxAmount +=  ((GrossIncome > 37000 ? 37000 : GrossIncome) - 18200) * 0.19M;
-                }
-                if (GrossIncome > 37000)
-                {
-                    incomeTaxAmount += ((GrossIncome > 87000 ? 87000 : GrossIncome) - 37000) * 0.325M;
-                }
-                if (GrossIncome > 87000)
-                {
-                    incomeTaxAmount += ((GrossIncome > 180000 ? 180000 : GrossIncome) - 87000) * 0.37M;
-                }
-                if (GrossIncome > 180000)
-                {
-                    incomeTaxAmount += ((GrossIncome - 180000) * 41) / 100;
-                }
+                incomeTaxAmount +=  ((GrossIncome > taxBand.TaxBandThreshold2 ? taxBand.TaxBandThreshold2 : GrossIncome) - taxBand.TaxBandThreshold1) * 0.19M;
             }
+            if (GrossIncome > 37000)
+            {
+                incomeTaxAmount += ((GrossIncome > taxBand.TaxBandThreshold3 ? taxBand.TaxBandThreshold3 : GrossIncome) - taxBand.TaxBandThreshold2) * 0.325M;
+            }
+            if (GrossIncome > 87000)
+            {
+                incomeTaxAmount += ((GrossIncome > taxBand.TaxBandThreshold4 ? taxBand.TaxBandThreshold4 : GrossIncome) - taxBand.TaxBandThreshold3) * 0.37M;
+            }
+            if (GrossIncome > 180000)
+            {
+                incomeTaxAmount += (GrossIncome - 180000) * 0.41M;
+            }
+            
             return Math.Round(incomeTaxAmount / 12);
         }
     }

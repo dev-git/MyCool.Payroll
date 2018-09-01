@@ -13,6 +13,20 @@ namespace MyCool.Payroll.Web.Controllers
 {
     public class PayrollController : Controller
     {
+        //List<Models.EmployeeModel> EmployeeList = new List<Models.EmployeeModel>();
+
+
+ 
+        //private List<Models.EmployeeModel> EmployeeList
+        //{
+        //    get {
+        //        return TempData["employee"] as List<Models.EmployeeModel>;
+        //    }
+        //    set {
+        //        TempData["employee"] = value;
+        //    }
+        //}
+
         Facade serviceImplementation = new Facade();
         // GET: Payroll
         public IActionResult Index()
@@ -49,35 +63,84 @@ namespace MyCool.Payroll.Web.Controllers
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await formFile.CopyToAsync(stream);
-                        //var reader = formFile.OpenReadStream();
+
                         using (var reader = new StreamReader(formFile.OpenReadStream()))
                         {
+                            int counter = 1;
                             while (!reader.EndOfStream)
                             {
                                 var line = reader.ReadLine();
                                 var data = line.Split(new[] { ',' });
                                 
-                                
                                 var employee = new Models.EmployeeModel {
+                                    EmployeeID = counter,
                                     FirstName = data[0],
                                     LastName = data[1],
                                     AnnualSalary = Decimal.Parse(data[2]),
                                     SuperRate = Int32.Parse(data[3].Replace("%", "")),
-                                    PaymentStart = GetStartDate(data[4])
+                                    PaymentStart = GetStartDate(data[4]),
+                                    PayPeriod = data[4]
                                 };
+
                                 empList.Add(employee);
+                                counter++;
                             }
                         }
                     }
                 }
             }
+ 
+            return View("_EmployeeList", empList);
+        }
 
-            // process uploaded files
-            // Don't rely on or trust the FileName property without validation.
+        [HttpGet("Load")]
+        public ActionResult Load(string fullName, decimal annualSalary, decimal superRate, string payPeriod, int employeeID)
+        {
+            var employee = new Models.EmployeeModel
+            {
+                EmployeeID = employeeID,
+                AnnualSalary = annualSalary,
+                PayPeriod = payPeriod,
+                SuperRate = superRate
+            };
 
-            //return Ok(new { count = files.Count, size, filePath });
-            //return Ok(new { emplist = empList });
-            return View("_EmployeeDetail", empList);
+            decimal incomeTax = serviceImplementation.GetIncomeTaxAmount(employee.AnnualSalary);
+            decimal superAmount = serviceImplementation.GetSuperAmount(employee.AnnualSalary, employee.SuperRate);
+
+            Models.PayslipModel payslipModel = new Models.PayslipModel
+            {
+                FullName = fullName,
+                PayPeriod = employee.PayPeriod,
+                GrossIncome = (employee.AnnualSalary / 12),
+                IncomeTax = incomeTax,
+                NetIncome = (employee.AnnualSalary / 12) - incomeTax,
+                SuperAmount = superAmount
+            };
+
+            return View("Payslip", payslipModel);
+        }
+
+        [HttpGet("Display")]
+        public ActionResult Display(int employeeID)
+        { 
+            List<Models.EmployeeModel> EmployeeList = TempData["employee"] as List<Models.EmployeeModel>;
+
+            var employee = EmployeeList.FirstOrDefault(p => p.EmployeeID == employeeID);
+
+            decimal incomeTax = serviceImplementation.GetIncomeTaxAmount(employee.AnnualSalary);
+            decimal superAmount = serviceImplementation.GetSuperAmount(employee.AnnualSalary, employee.SuperRate);
+
+            Models.PayslipModel payslipModel = new Models.PayslipModel
+            {
+                FullName = String.Format("{0} {1}", employee.FirstName, employee.LastName),
+                PayPeriod = employee.PayPeriod,
+                GrossIncome = (employee.AnnualSalary / 12),
+                IncomeTax = incomeTax,
+                NetIncome = (employee.AnnualSalary / 12) - incomeTax,
+                SuperAmount = superAmount
+            };
+
+            return View("Payslip", payslipModel);
         }
 
         /// <summary>
@@ -104,7 +167,6 @@ namespace MyCool.Payroll.Web.Controllers
             };
 
             return View("Payslip", payslipModel);
-
         }
 
         /// <summary>

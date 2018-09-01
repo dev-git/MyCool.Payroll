@@ -12,15 +12,6 @@
 
 <h2>Payroll</h2>
 
-@*<p>
-        <a asp-action="Create">Create New</a>
-    </p>
-
-    <p>
-        <a asp-action="Load">Load CSV</a>
-    </p>*@
-
-
 <div class="form-group">
     <label for="exampleFormControlSelect1">Select Month and Year</label>
     <span class="input-group-btn">
@@ -46,20 +37,6 @@
         </select>
     </span>
 </div>
-
-@*<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="ddnYear" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Year
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">2017</a>
-        <a class="dropdown-item" href="#">2018</a>
-        <a class="dropdown-item" href="#">2019</a>
-    </div>
-</div>*@
-
-@*@Html.DropDownList("payrollYear", ViewData["yearList"] as List<SelectListItem>, new { @class = "headerselect", onchange = "SelectedIndexChanged('xmlfileitemmain')" })*@
-@*@Html.DropDownList("Select", yearList, new { @class = "btn btn-secondary dropdown-toggle", onchange = "GetYear();", @id = "cmbYear" })*@
 
 @if (Model.Count() == 0)
 {
@@ -91,8 +68,7 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-                
-                <tr>
+                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstName)
                     </td>
@@ -109,48 +85,48 @@ else
                         @Html.DisplayFor(modelItem => item.PaymentStart)
                     </td>
                     <td>
-                        
- 
-                        <button class="btn btn-primary" type="button" onclick="@(Html.Raw(String.Format("LoadPayslip('{0}', {1}, {2}, '{3}')", 
-                                                                                String.Format("{0} {1}", item.FirstName, item.LastName),
-                                                                                item.AnnualSalary,
-                                                                                item.SuperRate,
-                                                                                item.PaymentStart.ToShortDateString()
-                                                                                )))">Print Payslip</button>
+                        @* This is a bit of fudge. Ideally we'd pass back the Employee ID (primary key) 
+                            to the webapi controller and return the relevant details....
+                        *@
+                            <button class="btn btn-primary" 
+                                    type="button" onclick="@(Html.Raw(String.Format("LoadPayslip('{0}', {1}, {2}, '{3}')",
+                                                                    String.Format("{0} {1}", item.FirstName, item.LastName),
+                                                                    item.AnnualSalary,
+                                                                    item.SuperRate,
+                                                                    item.PaymentStart.ToShortDateString()
+                                                                    )))">Print Payslip</button>
 
-                                     
-                    </td>
-                </tr>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    <script type="text/javascript">
+        function GetYear() {
+            var myyear = document.getElementById('cmbYear').value;
+            alert(myyear);
+            return myyear;
+        };
+
+        function LoadPayslip(fullname, annualSalary, superRate, startDate) {
+            var myYear = document.getElementById('cmbYear').value;
+            var myMonth = document.getElementById('cmbMonth').value;
+
+            var payDate = new Date(myYear, myMonth - 1, 1);
+
+            var parts = startDate.split('/');
+            var myDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+            if (payDate < myDate) {
+                alert('The Employee had not started');
+                //return;
             }
-        </tbody>
-    </table>
-}
-
-<script type="text/javascript">
-    function GetYear() {
-        var myyear = document.getElementById('cmbYear').value;
-        alert(myyear);
-        return myyear;
-    };
-
-    function LoadPayslip(fullname, annualSalary, superRate, startDate) {
-        var myYear = document.getElementById('cmbYear').value;
-        var myMonth = document.getElementById('cmbMonth').value;
-
-        var payDate = new Date(myYear, myMonth - 1, 1);
-
-        var parts = startDate.split('/');
-        var myDate = new Date(parts[2], parts[1] - 1, parts[0]);
-
-        if (payDate < myDate) {
-            alert('Employee not started');
-            //return;
+            else {
+                var url = 'Print?fullName=' + fullname + '&annualSalary=' + annualSalary + '&superRate=' + superRate + '&payDate=' + payDate.toLocaleDateString('en-NZ');
+                window.open(url);
+            }
         }
-        else {
-            var url = 'Print?fullName=' + fullname + '&annualSalary=' + annualSalary + '&superRate=' + superRate + '&payDate=' + payDate.toLocaleDateString('en-NZ');
-            //var view = $.get('Print?fullName=' + fullname + '&annualSalary=600000');
-            window.open(url);
-        }
-        
-    }
-</script>
+    </script>
